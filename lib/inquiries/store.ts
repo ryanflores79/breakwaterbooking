@@ -8,8 +8,17 @@ import type {
 
 const INQUIRIES_COLLECTION = "bookingInquiries";
 
+export function inquiryDocument(record: BookingInquiryRecord) {
+  return Object.fromEntries(
+    Object.entries(record).filter(([, value]) => value !== undefined),
+  );
+}
+
 export async function storeInquiry(record: BookingInquiryRecord) {
-  await firestore.collection(INQUIRIES_COLLECTION).doc(record.id).set(record);
+  await firestore
+    .collection(INQUIRIES_COLLECTION)
+    .doc(record.id)
+    .set(inquiryDocument(record));
 }
 
 export async function updateNotificationStatus(
