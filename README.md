@@ -58,14 +58,14 @@ firebase use breakwaterbooking
 firebase deploy --only firestore
 ```
 
-Create the two credential-dependent App Hosting secrets referenced by `apphosting.yaml`:
+Create the two credential-dependent App Hosting secrets when they are available:
 
 ```bash
 firebase apphosting:secrets:set resendApiKey
 firebase apphosting:secrets:set turnstileSecretKey
 ```
 
-`inquiryHashSecret` already exists in Secret Manager with a generated value. After creating the App Hosting backend, grant that backend access to all three referenced secrets if the setup flow has not already done so.
+Then add `RESEND_API_KEY` and `TURNSTILE_SECRET_KEY` secret references to `apphosting.yaml` and roll out the resulting commit. `inquiryHashSecret` already exists in Secret Manager with a generated value. After creating the App Hosting backend, grant that backend access to all referenced secrets if the setup flow has not already done so.
 
 Set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `NEXT_PUBLIC_GA_MEASUREMENT_ID` in the App Hosting backend environment. Both must be available during the build because Next.js embeds `NEXT_PUBLIC_*` values in browser code.
 

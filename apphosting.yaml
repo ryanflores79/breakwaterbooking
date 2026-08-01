@@ -24,14 +24,6 @@ env:
     value: Breakwater Website <website@notify.breakwaterbooking.com>
     availability:
       - RUNTIME
-  - variable: RESEND_API_KEY
-    secret: resendApiKey
-    availability:
-      - RUNTIME
-  - variable: TURNSTILE_SECRET_KEY
-    secret: turnstileSecretKey
-    availability:
-      - RUNTIME
   - variable: INQUIRY_HASH_SECRET
     secret: inquiryHashSecret
     availability:
