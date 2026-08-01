@@ -1,0 +1,38 @@
+runConfig:
+  minInstances: 0
+  maxInstances: 3
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://breakwaterbooking.com
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: FIREBASE_PROJECT_ID
+    value: breakwaterbooking
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: BOOKING_RECIPIENT_EMAIL
+    value: booking@breakwaterbooking.com
+    availability:
+      - RUNTIME
+  - variable: BOOKING_SENDER_EMAIL
+    value: Breakwater Website <website@notify.breakwaterbooking.com>
+    availability:
+      - RUNTIME
+  - variable: RESEND_API_KEY
+    secret: resendApiKey
+    availability:
+      - RUNTIME
+  - variable: TURNSTILE_SECRET_KEY
+    secret: turnstileSecretKey
+    availability:
+      - RUNTIME
+  - variable: INQUIRY_HASH_SECRET
+    secret: inquiryHashSecret
+    availability:
+      - RUNTIME
