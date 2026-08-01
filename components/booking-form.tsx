@@ -268,7 +268,7 @@ export function BookingForm() {
             <div
               className="cf-turnstile"
               data-sitekey={turnstileSiteKey}
-              data-action="booking-inquiry"
+              data-action="turnstile-spin-v2"
               data-theme="light"
               data-response-field-name="turnstileToken"
             />

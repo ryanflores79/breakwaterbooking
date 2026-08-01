@@ -11,6 +11,11 @@ env:
     availability:
       - BUILD
       - RUNTIME
+  - variable: NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    value: 0x4AAAAAAEDL564zPmQvcPUJ
+    availability:
+      - BUILD
+      - RUNTIME
   - variable: FIREBASE_PROJECT_ID
     value: breakwaterbooking
     availability:
@@ -26,5 +31,13 @@ env:
       - RUNTIME
   - variable: INQUIRY_HASH_SECRET
     secret: inquiryHashSecret
+    availability:
+      - RUNTIME
+  - variable: RESEND_API_KEY
+    secret: resendApiKey
+    availability:
+      - RUNTIME
+  - variable: TURNSTILE_SECRET
+    secret: turnstileSecret
     availability:
       - RUNTIME

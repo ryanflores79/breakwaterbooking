@@ -10,10 +10,10 @@ type TurnstileResponse = {
 const TEST_SECRET = "1x0000000000000000000000000000000AA";
 
 export async function verifyTurnstile(token: string, remoteIp: string) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+  const secret = process.env.TURNSTILE_SECRET;
 
   if (!secret && process.env.NODE_ENV === "production") {
-    throw new Error("TURNSTILE_SECRET_KEY is not configured");
+    throw new Error("TURNSTILE_SECRET is not configured");
   }
 
   const controller = new AbortController();
@@ -24,12 +24,11 @@ export async function verifyTurnstile(token: string, remoteIp: string) {
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
           secret: secret ?? TEST_SECRET,
           response: token,
-          remoteip: remoteIp || undefined,
-          idempotency_key: crypto.randomUUID(),
+          remoteip: remoteIp,
         }),
         signal: controller.signal,
         cache: "no-store",
@@ -52,8 +51,10 @@ export async function verifyTurnstile(token: string, remoteIp: string) {
     return (
       result.success &&
       (!result.hostname || allowedHosts.has(result.hostname)) &&
-      (!result.action || result.action === "booking-inquiry")
+      (!result.action || result.action === "turnstile-spin-v2")
     );
+  } catch {
+    return false;
   } finally {
     clearTimeout(timeout);
   }
